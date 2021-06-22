@@ -55,6 +55,7 @@ void handleADC()
 void randomNum()
 {
   float randomNumber;
+
   randomNumber = random(300 / .2);
   String randomNum_value = String(randomNumber);
 
