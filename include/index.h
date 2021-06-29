@@ -1,6 +1,9 @@
 const char MAIN_page[] PROGMEM = R"=====(
 <!DOCTYPE html>
 <html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <style>
   /*
       Sets h1<>, paragraphs and div tags to center align text
@@ -25,10 +28,20 @@ const char MAIN_page[] PROGMEM = R"=====(
   <br>LED State is : <span id="LEDState">NA</span>
 </div>
 
+<div class="w3-container">
+  <h2>Dynamic Progress Bar</h2>
+
+  <div class="w3-light-grey">
+    <div id="myBar" class="w3-green" style="height:24px;width:0"></div>
+  </div>
+  <br>
+
+  <button class="w3-button w3-green" onclick="move()">Click</button> 
+</div>
+
 <!--HTML ends here-->
 
 <script>
-
 function sendData(led) 
 {
   /*
@@ -139,10 +152,42 @@ function getData()
     if (this.readyState == 4 && this.status == 200) 
     {
       document.getElementById("randomNum").innerHTML = this.responseText;
+          //Fill Progress Bar
+      var elem = document.getElementById("myBar");
+      var width = 1;
+      var id = setInterval(frame, 10);
+      function frame()
+      {
+        if (width >= 100) 
+        {
+          clearInterval(id);
+        } 
+        else 
+        {
+          width++;
+          elem.style.width = randomNum + '%'; 
+        }
     }
   };
   xhttp.open("GET", "/randomNum", true);
+
   xhttp.send();
+
+  /*
+  //Fill Progress Bar
+  var elem = document.getElementById("myBar");
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%'; 
+    }
+  */
+}
+
 }
 </script>
 </body>

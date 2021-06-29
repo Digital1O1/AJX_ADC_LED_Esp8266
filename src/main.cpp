@@ -56,7 +56,7 @@ void randomNum()
 {
   float randomNumber;
 
-  randomNumber = random(300 / .2);
+  randomNumber = random(50);
   String randomNum_value = String(randomNumber);
 
   // send() command needs the value to be stored as a string
