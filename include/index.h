@@ -26,22 +26,61 @@ const char MAIN_page[] PROGMEM = R"=====(
   <br>ADC Value is : <span id="ADCValue">0</span><br>
   <br>Random number generated : <span id="randomNum">0</span><br>
   <br>LED State is : <span id="LEDState">NA</span>
+
+<br>
 </div>
 
-<div class="w3-container">
-  <h2>Dynamic Progress Bar</h2>
-
-  <div class="w3-light-grey">
-    <div id="myBar" class="w3-green" style="height:24px;width:0"></div>
-  </div>
-  <br>
-
-  <button class="w3-button w3-green" onclick="move()">Click</button> 
+<div class="w3-light-grey">
+  <div id="myBar" class="w3-container w3-green" style="height:24px;width:1%"></div>
+  
 </div>
+
+<button class="w3-button w3-light-grey" onclick="move()">Click Me</button>
+<br>TEST 2 : <span id="randomNum2">0</span><br>
+
+
 
 <!--HTML ends here-->
 
 <script>
+  // Bar Graph
+  
+  function move() 
+  {  
+    ///*
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() 
+    {
+      if (width >= 100) 
+      {
+        clearInterval(id);
+      } 
+      else 
+      {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200) 
+          {
+            document.getElementById("randomNum2").innerHTML = this.responseText;
+            elem.style.width = document.getElementById("randomNum2").innerHTML + '%';
+
+          }
+        };
+        xhttp.open("GET", "/randomNum2", true);
+        xhttp.send();          
+
+        width++;
+        //elem.style.width = width + '%';
+      }
+    }
+    //*/
+   // Display random number values generated from ESP8266
+
+}
+
 function sendData(led) 
 {
   /*
@@ -129,6 +168,7 @@ setInterval(function()
 {
   // Call a function repetatively with 500ms Second interval
   getData();
+  //move();
 }, 500); //500mSeconds update rate
 
 function getData() 
@@ -152,43 +192,12 @@ function getData()
     if (this.readyState == 4 && this.status == 200) 
     {
       document.getElementById("randomNum").innerHTML = this.responseText;
-          //Fill Progress Bar
-      var elem = document.getElementById("myBar");
-      var width = 1;
-      var id = setInterval(frame, 10);
-      function frame()
-      {
-        if (width >= 100) 
-        {
-          clearInterval(id);
-        } 
-        else 
-        {
-          width++;
-          elem.style.width = randomNum + '%'; 
-        }
     }
   };
   xhttp.open("GET", "/randomNum", true);
-
   xhttp.send();
-
-  /*
-  //Fill Progress Bar
-  var elem = document.getElementById("myBar");
-  var width = 1;
-  var id = setInterval(frame, 10);
-  function frame() {
-    if (width >= 100) {
-      clearInterval(id);
-    } else {
-      width++;
-      elem.style.width = width + '%'; 
-    }
-  */
 }
 
-}
 </script>
 </body>
 </html>

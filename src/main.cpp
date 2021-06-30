@@ -56,11 +56,22 @@ void randomNum()
 {
   float randomNumber;
 
-  randomNumber = random(50);
+  randomNumber = random(5);
   String randomNum_value = String(randomNumber);
 
   // send() command needs the value to be stored as a string
   server.send(200, "text/plane", randomNum_value);
+}
+// Generate and send random number
+void randomNum2()
+{
+  float randomNumber2;
+
+  randomNumber2 = random(75);
+  String randomNum_value2 = String(randomNumber2);
+
+  // send() command needs the value to be stored as a string
+  server.send(200, "text/plane", randomNum_value2);
 }
 void handleLED()
 {
@@ -107,7 +118,7 @@ void setup(void)
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED)
   {
-    delay(500);
+    delay(250);
     Serial.print(".");
   }
 
@@ -123,6 +134,7 @@ void setup(void)
   server.on("/setLED", handleLED);
   server.on("/readADC", handleADC);
   server.on("/randomNum", randomNum);
+  server.on("/randomNum2", randomNum2);
 
   // Start server
   server.begin();
