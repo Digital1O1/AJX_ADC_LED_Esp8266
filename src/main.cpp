@@ -12,8 +12,8 @@
 
 #define LED 5
 
-const char *ssid = "ATT7RT97i2";
-const char *password = "f3y436pwzu6y";
+const char *ssid = "";
+const char *password = "";
 
 // Create ESP8266WebServer class object | Server on port 80
 ESP8266WebServer server(80);
