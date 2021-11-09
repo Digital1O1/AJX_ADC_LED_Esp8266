@@ -35,8 +35,8 @@ const char MAIN_page[] PROGMEM = R"=====(
   
 </div>
 
-<button class="w3-button w3-light-grey" onclick="move()">Click Me</button>
-<br>TEST 2 : <span id="randomNum2">0</span><br>
+<button class="w3-button w3-light-grey" onclick="move()">Start Bar Graph</button> 
+<br>ADC Bar Graph Value : <span id="barADC">0</span><br>
 
 
 
@@ -53,7 +53,7 @@ const char MAIN_page[] PROGMEM = R"=====(
     var id = setInterval(frame, 10);
     function frame() 
     {
-      if (width >= 100) 
+      if (width >= 1024) 
       {
         clearInterval(id);
       } 
@@ -64,15 +64,16 @@ const char MAIN_page[] PROGMEM = R"=====(
         {
           if (this.readyState == 4 && this.status == 200) 
           {
-            document.getElementById("randomNum2").innerHTML = this.responseText;
-            elem.style.width = document.getElementById("randomNum2").innerHTML + '%';
+            document.getElementById("barADC").innerHTML = this.responseText;
+            var expand = document.getElementById("barADC").innerHTML;
+            elem.style.width = expand + '%';
 
           }
         };
-        xhttp.open("GET", "/randomNum2", true);
+        xhttp.open("GET", "/barADC", true);
         xhttp.send();          
-
-        width++;
+        
+        //width++;
         //elem.style.width = width + '%';
       }
     }
@@ -169,7 +170,7 @@ setInterval(function()
   // Call a function repetatively with 500ms Second interval
   getData();
   //move();
-}, 500); //500mSeconds update rate
+}, 1000); //500mSeconds update rate
 
 function getData() 
 {

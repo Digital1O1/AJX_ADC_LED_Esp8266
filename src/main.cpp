@@ -134,7 +134,7 @@ void setup(void)
   server.on("/setLED", handleLED);
   server.on("/readADC", handleADC);
   server.on("/randomNum", randomNum);
-  server.on("/randomNum2", randomNum2);
+  server.on("/barADC", handleADC);
 
   // Start server
   server.begin();
